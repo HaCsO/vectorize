@@ -58,8 +58,6 @@ static DIRS: Dir = Dir{
 	southeast: 0x0101
 };
 
-
-
 trait Inertia 
 {
 	fn calc_vector_inertia(&mut self, delay: &Delay, weight: f32) {}		
@@ -104,8 +102,8 @@ fn process_force_adj(force_vector: &mut Vec2, result_vector: &mut Vec2, delay: &
 	let mut keybit: u16 = 0;	
 	let mut angle: Option<i16> = Option::None;
 	keybit += DIRS.north * is_key_down(KeyCode::Up) as u16;
-	keybit += DIRS.east * is_key_down(KeyCode::Down) as u16;
-	keybit += DIRS.south * is_key_down(KeyCode::Right) as u16;
+	keybit += DIRS.south * is_key_down(KeyCode::Down) as u16;
+	keybit += DIRS.east * is_key_down(KeyCode::Right) as u16;
 	keybit += DIRS.west * is_key_down(KeyCode::Left) as u16;
 	match DIR2ANGLE.lock().unwrap().get(&keybit) {
 		Some(r) => {angle.insert(*r);},	
@@ -132,13 +130,9 @@ fn process_force_adj(force_vector: &mut Vec2, result_vector: &mut Vec2, delay: &
 	}
 }
 
-
-
 async fn draw_plane() {
 	draw_line(HALF_WIDTH, 0.0, HALF_WIDTH, HEIGHT, 2.0, BLACK);
 	draw_line(0.0, HALF_HEIGHT, WIDTH, HALF_HEIGHT, 2.0, BLACK);
-
-
 	let mut chert_low = HALF_WIDTH - 5.0;
 	let mut chert_max = HALF_WIDTH + 5.0;
 	let mut cord_text: String;
@@ -152,7 +146,6 @@ async fn draw_plane() {
 	}
 	chert_low = HALF_HEIGHT - 5.0;
 	chert_max = HALF_HEIGHT + 5.0;
-
 	for _y in (0..HEIGHT as i16).step_by(30) {
 		y = _y as f32;
 		draw_line(chert_low, y as f32, chert_max, y as f32, 1.0, BLACK);
